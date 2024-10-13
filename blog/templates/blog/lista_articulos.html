@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Artículos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Lista de Artículos</h2>
+    {% if request.user.is_authenticated and request.user.perfil.rol in ['editor', 'administrador'] %}
+        <a href="{% url 'blog:crear_articulo' %}" class="btn btn-success mb-3">Crear Artículo</a>
+    {% endif %}
+    {% for articulo in articulos %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ articulo.titulo }}</h5>
+                <p class="card-text">{{ articulo.contenido|truncatechars:100 }}</p>
+                <a href="{% url 'blog:detalle_articulo' articulo.pk %}" class="btn btn-primary">Leer más</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>No hay artículos disponibles.</p>
+    {% endfor %}
+</div>
+{% endblock %}
