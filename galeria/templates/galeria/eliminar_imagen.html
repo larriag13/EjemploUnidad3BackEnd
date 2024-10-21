@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Imagen{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Eliminar Imagen</h2>
+    <p>¿Estás seguro de que deseas eliminar la imagen "{{ imagen.titulo }}"?</p>
+    <img src="{{ imagen.imagen.url }}" class="img-thumbnail mb-3" width="200" alt="{{ imagen.titulo }}">
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a href="{% url 'galeria:detalle_imagen' imagen.pk %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ articulo.titulo }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ articulo.titulo }}</h2>
+    <p><small class="text-muted">Publicado por {{ articulo.autor.username }} el {{ articulo.fecha_publicacion|date:"d/m/Y H:i" }}</small></p>
+    <hr>
+    <p>{{ articulo.contenido }}</p>
+
+    {% if request.user.is_authenticated and request.user == articulo.autor or request.user.perfil.rol == 'administrador' %}
+        <a href="{% url 'blog:editar_articulo' articulo.pk %}" class="btn btn-secondary">Editar Artículo</a>
+    {% endif %}
+
+    <a href="{% url 'blog:lista_articulos' %}" class="btn btn-link mt-3">Volver a la Lista de Artículos</a>
+</div>
+{% endblock %}

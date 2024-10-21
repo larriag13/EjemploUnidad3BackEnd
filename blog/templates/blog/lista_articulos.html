@@ -5,8 +5,10 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Lista de Artículos</h2>
-    {% if request.user.is_authenticated and request.user.perfil.rol in ['editor', 'administrador'] %}
-        <a href="{% url 'blog:crear_articulo' %}" class="btn btn-success mb-3">Crear Artículo</a>
+    {% if request.user.is_authenticated %}
+        {% if request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
+            <a href="{% url 'blog:crear_articulo' %}" class="btn btn-success mb-3">Crear Artículo </a>
+        {% endif %}
     {% endif %}
     {% for articulo in articulos %}
         <div class="card mb-3">
@@ -19,5 +21,6 @@
     {% empty %}
         <p>No hay artículos disponibles.</p>
     {% endfor %}
+    {{ request.user.perfil.rol }}
 </div>
 {% endblock %}

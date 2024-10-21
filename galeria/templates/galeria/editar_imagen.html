@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Imagen{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Editar Imagen</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            <label for="id_titulo">Título:</label>
+            {{ form.titulo.errors }}
+            {{ form.titulo }}
+        </div>
+        <div class="form-group">
+            <label for="id_descripcion">Descripción:</label>
+            {{ form.descripcion.errors }}
+            {{ form.descripcion }}
+        </div>
+        <div class="form-group">
+            <label for="id_imagen">Imagen Actual:</label><br>
+            <img src="{{ imagen.imagen.url }}" class="img-thumbnail mb-2" width="200" alt="{{ imagen.titulo }}">
+            <label for="id_imagen">Cambiar Imagen (opcional):</label>
+            {{ form.imagen.errors }}
+            {{ form.imagen }}
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        <a href="{% url 'galeria:detalle_imagen' imagen.pk %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

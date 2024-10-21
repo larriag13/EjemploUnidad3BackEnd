@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Subir Imagen{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Subir Nueva Imagen</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            <label for="id_titulo">Título:</label>
+            {{ form.titulo.errors }}
+            {{ form.titulo }}
+        </div>
+        <div class="form-group">
+            <label for="id_descripcion">Descripción:</label>
+            {{ form.descripcion.errors }}
+            {{ form.descripcion }}
+        </div>
+        <div class="form-group">
+            <label for="id_imagen">Seleccionar Imagen:</label>
+            {{ form.imagen.errors }}
+            {{ form.imagen }}
+        </div>
+        <button type="submit" class="btn btn-primary">Subir Imagen</button>
+    </form>
+</div>
+{% endblock %}

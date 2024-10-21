@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
      # Nuestras aplicaciones
-    'usuarios',
     'usuarios.apps.UsuariosConfig',
     'blog',
     'galeria',
@@ -80,6 +79,8 @@ WSGI_APPLICATION = 'unidad3.wsgi.application'
 
 from decouple import config
 
+import pymysql
+pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -131,7 +132,7 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR,"static")]
 
 #Configuración para archivos media
 MEDIA_URL='media/'
-MEDIA_ROOT=[os.path.join(BASE_DIR,"media")]
+MEDIA_ROOT=os.path.join(BASE_DIR,"media")
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'

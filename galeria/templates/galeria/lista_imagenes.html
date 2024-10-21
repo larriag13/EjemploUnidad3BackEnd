@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Galería de Imágenes</h2>
-    {% if request.user.is_authenticated and request.user.perfil.rol in ['editor', 'administrador'] %}
+    {% if request.user.is_authenticated and request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
         <a href="{% url 'galeria:subir_imagen' %}" class="btn btn-success mb-3">Subir Imagen</a>
     {% endif %}
     <div class="row">
